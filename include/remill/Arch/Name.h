@@ -91,6 +91,7 @@
 #endif
 
 #include <string_view>
+#include <cinttypes>
 
 namespace llvm {
 class Triple;
