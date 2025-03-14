@@ -93,6 +93,9 @@ struct float80_t final {
 
   inline ~float80_t(void) = default;
   inline float80_t(void) : data{0,} {}
+#ifdef __CUDACC__
+  inline __device__ float80_t(void) : data{0,} {}
+#endif
 
   float80_t(const float80_t &) = default;
   float80_t &operator=(const float80_t &) = default;
