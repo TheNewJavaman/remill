@@ -92,9 +92,10 @@ struct float80_t final {
   uint8_t data[kEightyBitsInBytes];
 
   inline ~float80_t(void) = default;
-  inline float80_t(void) : data{0,} {}
 #ifdef __CUDACC__
-  inline __device__ float80_t(void) : data{0,} {}
+  inline __host__ __device__ float80_t(void) : data{0,} {}
+#else
+  inline float80_t(void) : data{0,} {}
 #endif
 
   float80_t(const float80_t &) = default;
