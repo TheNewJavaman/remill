@@ -720,6 +720,11 @@ llvm::Function *Arch::DeclareLiftedFunction(std::string_view name_,
   auto func_type = llvm::dyn_cast<llvm::FunctionType>(
       RecontextualizeType(LiftedFunctionType(), context));
   llvm::StringRef name(name_.data(), name_.size());
+
+  if (auto existing = module->getFunction(name)) {
+    return existing;
+  }
+
   auto func = llvm::Function::Create(
       func_type, llvm::GlobalValue::ExternalLinkage, 0u, name, module);
 
